@@ -2,7 +2,6 @@ package com.scm.Entities;
 
 import java.util.List;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import jakarta.persistence.CascadeType;
@@ -12,7 +11,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
@@ -27,8 +25,8 @@ public class User {
 	@Size(min = 2 , max = 25 , message = "Minimum char is 2 and maximum char is 25")
 	private String name;
 
-	//@Column(unique = true)
-	private String Email;
+	@Column(unique = true)
+	private String email;
 	private String password;
 	private String imaage;
 
@@ -62,11 +60,11 @@ public class User {
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -119,7 +117,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name=" + name + ", Email=" + Email + ", password=" + password + ", imaage="
+		return "Users [id=" + id + ", name=" + name + ", Email=" + email + ", password=" + password + ", imaage="
 				+ imaage + ", about=" + about + ", role=" + role + ", enable=" + enable + ", contacts=" + contacts
 				+ "]";
 	}

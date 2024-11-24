@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
 	th:replace="base::layout(~{::section})">
 <head>
 <meta charset="UTF-8" />
@@ -8,72 +8,121 @@
 <body>
 	<section>
 		<div class="container">
+
 			<div class="row">
+
 				<div class="col-md-6 offset-md-3">
-					<div class="my-card mt-3">
-						<!-- Error message -->
-						<div th:if="${session.message}"
-							th:classappend="${session.message.type}" class="alert"
-							role="alert">
-							<p class="text-center" th:text="${session.message.content}"></p>
-							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+
+					<div class="my-card mt-5">
+
+  					    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert text-center"  role="alert">
+							<p th:text="${session.message.content}"></p>
+					  	<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>    
+					   </div>
+
+						<div class="container text-center">
+							<img th:src="@{/img/membership.png}" style="width: 80px;"
+								class="mx-auto">
 						</div>
 
 						<h1 class="text-center">Register Here !!</h1>
 
-						<form novalidate th:action="@{/do_register}" method="post"
-							th:object="${user}">
-							<!-- Name field -->
+
+		             
+
+						<form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}">
+
+
+							<!-- Name filed  -->
 							<div class="mb-3">
-								<label for="name-field" class="form-label">Your Name</label> <input
-									name="name" type="text" class="form-control"
-									th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
-									id="name-field" aria-describedby="emailHelp"
-									placeholder="Enter Here" required th:value="${user.name}">
+								<label for="name_filed" class="form-label">Your Name</label>
+								 <input
+								    name="name"
+									type="text" 
+									class="form-control"
+									th:classappend="${#fields.hasErrors('name') ? 'is-invalid' :'' }" 
+									id="name_filed"
+									aria-describedby="emailHelp" 
+									placeholder="Enter here" 
+									required 
+									th:value="${user.name}">
+									
+									<div class="invalid-feedback" th:each=" e : ${#fields.errors('name')}" th:text="${e}">
+									  
+									</div>
 							</div>
-							<div class="invalid-feedback"
-								th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
 
 							<!-- Email field -->
 							<div class="mb-3">
-								<label for="email-field" class="form-label">Your Email</label> <input
-									name="email" type="email" class="form-control" id="email-field"
-									aria-describedby="emailHelp" placeholder="Enter Here" required
-									th:value="${user.email}">
+								<label for="email_filed" class="form-label">Your Email</label> 
+								<input
+								    name="Email"
+									type="email" 
+									class="form-control" 
+									id="email_filed"
+									aria-describedby="emailHelp" 
+									placeholder="Enter here" 
+									required
+									th:value="${user.Email}">
 							</div>
+
 
 							<!-- Password field -->
 							<div class="mb-3">
-								<label for="password-field" class="form-label">Your
-									Password</label> <input name="password" type="password"
-									class="form-control" id="password-field"
-									aria-describedby="emailHelp" placeholder="Enter Here" required
-									th:value="${user.password}">
+								<label for="password_filed" class="form-label">Password</label>
+
+								<input type="password"
+								name="password" 
+								class="form-control" 
+								id="password_filed"
+								aria-describedby="emailHelp" 
+								placeholder="Enter here" 
+								required
+								th:value="${user.password}">
 							</div>
+
 
 							<!-- About field -->
-							<div class="mb-3">
-								<textarea name="about" rows="8" class="form-control"
-									placeholder="Enter something about yourself"
-									th:value="${user.about}"></textarea>
+							<div class="form-floating mb-3">
+						      
+							
+								<textarea name="about"
+								    class="form-control"
+									placeholder="Enter about yourself" 
+									id="about_filed"
+									rows="20"
+									th:text="${user.about}"
+									></textarea>
 							</div>
 
-							<!-- Check agreement -->
-							<div class="mb-3 form-check">
-								<input type="checkbox" name="agreement" class="form-check-input"
-									id="agreement"> <label for="agreement">Accept
-									Terms and Conditions</label>
-							</div>
 
-							<!-- Buttons -->
+                            <!-- term and condition -->
+                            
+                            <div class="mb-3">
+                            
+                              <input type="checkbox"
+                              name="agreement"
+                              id="agreement"
+                              class="form-check-input"/>
+                            
+                            <label for="agreement" class="form-label">Accept Term And Condition</label>
+                            
+                            </div>
+
+
 							<div class="container text-center">
-								<button type="submit"
-									class="btn bg-primary text-white btn-block">Submit</button>
-								<button type="reset" class="btn bg-warning text-white btn-block">Reset</button>
+
+								<button type="submit" class="btn bg-primary text-white">Submit</button>
+								<button type="reset" class="btn bg-danger text-white">Reset</button>
+
 							</div>
+
 						</form>
+
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</section>
