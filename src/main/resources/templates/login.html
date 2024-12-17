@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Home Page</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<section>
+		<div class="wrapper fadeInDown mt-5">
+			<div id="formContent">
+
+
+				<!-- Icon -->
+				<div class="fadeIn first p-3">
+					<img th:src="@{/img/profile.png}" style="width: 80px;" id="icon"
+						alt="User Icon" />
+				</div>
+
+				<!-- Login Form -->
+				<form th:action="@{/dologin}" method="post">
+
+					<div th:if="${param.error}" class="alert alert-danger mx-3">Please
+						Enter Valid Email & Password</div>
+
+					<div th:if="${param.logout}" class="alert alert-danger mx-3">You
+						Have been logged out</div>
+
+					<input type="text" id="login" class="fadeIn second" name="username"
+						placeholder="Enter Your Email">
+						
+						 <input type="text"
+						id="password" class="fadeIn third" name="password"
+						placeholder="Enter password"> 
+						
+						<input type="submit"
+						class="fadeIn fourth" value="Log In">
+				</form>
+
+				<!-- Sign up link-->
+				<div id="formFooter">
+					<a class="underlineHover" th:href="@{/signup}">Signup Here!</a>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</body>
+</html>

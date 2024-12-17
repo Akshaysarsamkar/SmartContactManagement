@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.scm.Dao.UserRepository;
@@ -63,7 +64,7 @@ public class HomeController {
 				return "signup";
 			}
 			
-			user.setRole("ROLE__USER");
+			user.setRole("ROLE_USER");
 			user.setEnable(true);
 			user.setImaage("default.jpg");
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -91,4 +92,11 @@ public class HomeController {
 
 	}
 
+	
+	//handler for custom login 
+	@GetMapping("/signin")
+	public String customLogin(Model m) {
+		m.addAttribute("title", "Login page");
+		return "login";
+	}
 }

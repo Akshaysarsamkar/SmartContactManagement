@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>dashboard</title>
+</head>
+<body>
+
+	<section>
+		<div class="card mx-3">
+			<div class="card-body">
+				<h1 class="text-center">Update Your Contact</h1>
+				<div class="container-fluid mt-1">
+					<div class="col-md-10 offset-md-1">
+						<form action="#" th:object="${contact}" method="post"
+							enctype="multipart/form-data" th:action="@{/user/process-update}"
+							class="mt-2">
+
+							<!-- Name -->
+							<div class="mb-1 row">
+								<label for="name-field" class="col-sm-2 col-form-label">Name</label>
+								<div class="col-sm-10">
+									<input th:value="${contact.name}" type="text" name="name"
+										class="form-control" id="name-field"
+										placeholder="Enter name Here" required>
+								</div>
+							</div>
+
+							<!-- Nickname -->
+							<div class="mb-1 row">
+								<label for="nickname-field" class="col-sm-2 col-form-label">Nickname</label>
+								<div class="col-sm-10">
+									<input th:value="${contact.nickname}" type="text"
+										name="nickname" class="form-control" id="nickname-field"
+										placeholder="Enter Nickname Here" required>
+								</div>
+							</div>
+
+							<!-- Phone No -->
+							<div class="mb-1 row">
+								<label for="phoneno-field" class="col-sm-2 col-form-label">Phone
+									No</label>
+								<div class="col-sm-10">
+									<input th:value="${contact.phoneno}" type="tel" name="phoneno"
+										class="form-control" id="phoneno-field"
+										placeholder="Enter Phone No" required>
+								</div>
+							</div>
+
+							<!-- Email -->
+							<div class="mb-1 row">
+								<label for="email-field" class="col-sm-2 col-form-label">Email</label>
+								<div class="col-sm-10">
+									<input th:value="${contact.email}" type="email" name="email"
+										class="form-control" id="email-field"
+										placeholder="Enter Email Here" required>
+								</div>
+							</div>
+
+							<!-- Work -->
+							<div class="mb-1 row">
+								<label for="work-field" class="col-sm-2 col-form-label">Work</label>
+								<div class="col-sm-10">
+									<input th:value="${contact.work}" type="text" name="work"
+										class="form-control" id="work-field"
+										placeholder="Enter Work Here" required>
+								</div>
+							</div>
+
+							<!-- Image -->
+
+							<!-- 	<div class="container">
+							  <img style="width:250px; height:250px;" th:src="@{'/img/' + ${contact.image}}" alt="" class="img-fluid my-profile-pic"/>
+							</div>
+							
+							 -->
+							<div class="mb-2 row">
+								<label for="image-field" class="col-sm-2 col-form-label">Image</label>
+								<div class="col-sm-10">
+									<input type="file" name="cimage" class="form-control"
+										id="image-field">
+								</div>
+							</div>
+
+							<!-- Description -->
+							<div class="mb-3 row">
+								<label for="description-field" class="col-sm-2 col-form-label">Description</label>
+								<div class="col-sm-10">
+									<textarea th:text="${contact.description}" class="form-control"
+										id="description-field" rows="5" name="description"
+										placeholder="Enter description here" required></textarea>
+								</div>
+							</div>
+
+							<input type="hidden" th:value="${contact.cid}" />
+
+							<!-- Save Button -->
+							<div class="container text-center">
+								<button class="btn btn-outline-primary">Save Contact</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

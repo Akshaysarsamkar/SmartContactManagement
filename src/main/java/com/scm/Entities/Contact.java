@@ -6,24 +6,28 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Size;
 
-@Entity(name="CONTACT")
+@Entity(name = "CONTACT")
 public class Contact {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cid;
+	
+	@Size(min = 2 , max = 35,message = "Enter valid name")
 	private String name;
 	private String nickname;
 	private String work;
-	
+
 	@Column(unique = true)
-	private String Email;
+	private String email;
 	private String image;
-	
+
 	@Column(length = 500)
 	private String description;
-	
+
+	@Size(max = 10 , min = 10 ,message = "Enter the Correct Number")
 	private String phoneno;
 
 	@ManyToOne
@@ -67,11 +71,11 @@ public class Contact {
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
 	public String getImage() {
@@ -106,4 +110,16 @@ public class Contact {
 		this.users = users;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Contact [cid=" + cid + ", name=" + name + ", nickname=" + nickname + ", work=" + work + ", email="
+//				+ email + ", image=" + image + ", description=" + description + ", phoneno=" + phoneno + ", users="
+//				+ users + "]";
+//	}
+	
+	public boolean equals(Object obj) {
+		return this.cid == ((Contact)obj).getCid();
+	}
+
+	
 }
