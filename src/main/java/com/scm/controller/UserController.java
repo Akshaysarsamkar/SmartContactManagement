@@ -54,20 +54,21 @@ public class UserController {
 		model.addAttribute("user", user);
 	}
 
+	// dasshboard
 	@RequestMapping("/index")
 	public String dashboard(Model model, Principal principal) {
 		model.addAttribute("title", "Dashboard - Smart Contact Manager");
 		return "normal/user_dashboard";
 	}
 
-	
+	// contact details
 	@GetMapping("/addcontact")
 	public String openAddContact(Model model) {
 		model.addAttribute("contact", new Contact());
 		model.addAttribute("title", "Add Contact - Smart Contact Manager");
 		return "/normal/contact";
 	}
-	
+
 	// Add contact
 	@PostMapping("/process-contact")
 	public String addContactData(@ModelAttribute Contact contact, @RequestParam("cimage") MultipartFile file,
@@ -81,7 +82,7 @@ public class UserController {
 				System.out.println("File is empty");
 				contact.setImage("banner.png"); // Optional: Set default image
 			} else {
-				String uniqueFileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+				String uniqueFileName = UUID.randomUUID().toString()+ file.getOriginalFilename();
 				File staticImgDir = new ClassPathResource("/static/img").getFile();
 				if (!staticImgDir.exists()) {
 					staticImgDir.mkdirs();
@@ -157,13 +158,11 @@ public class UserController {
 		Contact contact = contactReposity.findById(id).get();
 		int i = contact.getUsers().getId();
 		System.out.println(contact.getUsers().getId());
-		
+
 //		contact.setUsers(null);
 		User user = repository.findByEmail(p.getName());
-		
-		user.getContacts().remove(contact);
 
-        
+		user.getContacts().remove(contact);
 
 		if (user.getId() == i) {
 			contactReposity.delete(contact);
@@ -177,7 +176,6 @@ public class UserController {
 	}
 
 	// Update Contact
-
 	@PostMapping("/update-contact/{cid}")
 	public String UpdateContactNumber(Model model, @PathVariable("cid") int id) {
 
@@ -192,8 +190,8 @@ public class UserController {
 
 	// update Contact form
 	@PostMapping("/process-update")
-	public String UpdateContactHandler(@ModelAttribute Contact contact,
-			@RequestParam("cimage") MultipartFile file, Model m, HttpSession session, Principal p) {
+	public String UpdateContactHandler(@ModelAttribute Contact contact, @RequestParam("cimage") MultipartFile file,
+			Model m, HttpSession session, Principal p) {
 
 		try {
 
@@ -201,24 +199,17 @@ public class UserController {
 
 			}
 
-		
-
 			User user = repository.findByEmail(p.getName());
-			
+
 			System.out.println("1111111111111");
 
-		    contact.setUsers(user);
-			
+			contact.setUsers(user);
+
 			System.out.println("222222222222222222222");
 
 			contactReposity.save(contact);
-			
+
 			System.out.println("333333333333333333333");
-
-			
-
-
-			
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -228,17 +219,15 @@ public class UserController {
 //        System.out.println("COntact id " + contact.getCid());
 		return "";
 	}
-	
-	
-	
-	// Your Profile 
+
+	// Your Profile
 	@GetMapping("/profile")
 	public String Profile(Model m) {
-		
-		m.addAttribute("title","User Profile - Smart Contact Manager");
-		
+
+		m.addAttribute("title", "User Profile - Smart Contact Manager");
+
 		return "/normal/profile";
-		
+
 	}
 
 }
